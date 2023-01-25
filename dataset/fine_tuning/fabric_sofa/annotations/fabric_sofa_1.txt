@@ -1,0 +1,8 @@
+88 211 590 516 sofa
+47 395 446 639 table
+38 206 83 268 plant
+91 298 224 451 plant
+16 0 639 358 curtain
+0 254 110 377 table
+553 68 639 398 plant
+0 299 44 498 chair_stool

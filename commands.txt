@@ -1,0 +1,54 @@
+#Base Model
+python -u main.py \
+--logdir models/Paint-by-Example \
+--pretrained_model pretrained_models/sd-v1-4-modified-9channel.ckpt \
+--base configs/origin.yaml \
+--scale_lr False
+
+# Ohouse dataset pretrain with encoder unfreezed
+python -u main.py \
+--logdir experiments/ohouse_encoder_unfreezed_pretrain \
+--pretrained_model pretrained_models/sd-v1-4-modified-9channel.ckpt \
+--base configs/pretrain/ohouse_pretrain.yaml \
+--scale_lr False
+
+
+python -u main.py \
+--logdir experiments/class_label \
+--pretrained_model pretrained_models/sd-v1-4-modified-9channel.ckpt \
+--base configs/pretrain/class_label.yaml \
+--scale_lr False
+
+# Image input model Inference Script
+python scripts/inference.py \
+--plms --outdir results/ohouse_pretrain \
+--config configs/ohouse_pretrain.yaml \
+--ckpt /home/user/Paint-by-Example/experiments/ohouse_pretrain/encoder_unfreezed/epoch=000033.ckpt \
+--image_path bedroom_2.jpg \
+--mask_path bedroom_2.png \
+--reference_path hansam_bed_1.jpg \
+--seed 321 \
+--scale 5 \
+--gpu true
+
+
+
+# Fine-Tune Prior Model
+python -u main.py \
+--logdir experiments/fine_tune/fabric_sofa \
+--pretrained_model /home/user/Paint-by-Example/experiments/caption_pretrain/2022-12-26T06-25-48_pretrain_text_inversion/checkpoints/epoch=000022.ckpt \
+--base configs/fine_tune/fine_tune.yaml \
+--scale_lr False
+
+# Fine-Tuning Mask Augmented Model
+python -u main.py \
+--logdir experiments/fine_tune/mask_augmentation/fabric_sofa \
+--pretrained_model /home/user/Paint-by-Example/experiments/mask_augmentation/last.ckpt \
+--base configs/fine_tune/mask_augmentation_fine_tune.yaml \
+--scale_lr False
+
+python -u main.py \
+--logdir experiments/fine_tune/efficient/cloud_lamp \
+--pretrained_model /home/user/Paint-by-Example/pretrained_models/lsun_pretrained_model.ckpt \
+--base configs/fine_tune/finetune_efficient.yaml \
+--scale_lr False
