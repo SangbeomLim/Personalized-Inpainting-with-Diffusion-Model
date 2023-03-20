@@ -124,6 +124,7 @@ pipe = DiffusionPipeline.from_pretrained(
     torch_dtype=torch.float16,
 )
 pipe = pipe.to("cuda:5")
+pipe.scheduler = EulerAncestralDiscreteScheduler.from_config(pipe.scheduler.config) # Important
 
 monkeypatch_lora(pipe.unet, torch.load("/home/user/lora/efficient/mefema_sofa/lora_weight_e6_s4000.pt"))
 tune_lora_scale(pipe.unet, 1.00)
