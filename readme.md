@@ -1,4 +1,4 @@
-# Universal Advisor Interior Inpainting
+# Personalized Inpainting with Diffusion Model using LoRA
 
 ## Requirements
 A suitable [conda](https://conda.io/) environment named `interior-inpaint` can be created
