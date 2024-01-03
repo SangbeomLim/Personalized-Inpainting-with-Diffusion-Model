@@ -1,4 +1,4 @@
-# Image Guided Personalized Inpainting with Diffusion Model using LoRA
+# Image Guided Inpainting with Personalized Diffusion Model using LoRA
 
 ## Requirements
 A suitable [conda](https://conda.io/) environment named `interior-inpaint` can be created
